@@ -10,7 +10,7 @@ This folder stores utility script which I'm usually using in my Winodws environm
 	```
 pushd %HOMEPATH%
 git clone https://github.com/aikige/homeBinWin.git bin
-```
+	```
 
 1. Open "System Property" dialog in Windows and add %HOMEPATH%\bin
 	to `PATH` environment variable.
@@ -18,4 +18,4 @@ git clone https://github.com/aikige/homeBinWin.git bin
 
 	```
 control sysdm.cpl
-```
+	```
