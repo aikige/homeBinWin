@@ -12,7 +12,7 @@ pushd %HOMEPATH%
 git clone https://github.com/aikige/homeBinWin.git bin
 ```
 
-1. Open "System Property" dialog in Windows and add %HOMEPATH%\bin
+2. Open "System Property" dialog in Windows and add %HOMEPATH%\bin
 	to `PATH` environment variable.
 	Following command can be used to open the dialog.
 
