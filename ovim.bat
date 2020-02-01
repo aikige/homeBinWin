@@ -1,5 +1,5 @@
 @echo off
 setlocal
-path %HOMEPATH%\bin;%PATH%
+path %~dp0;%PATH%
 sendToVim.vbs %*
 endlocal
