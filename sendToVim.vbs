@@ -7,20 +7,7 @@ Set fs = WScript.CreateObject("Scripting.FileSystemObject")
 
 '# store gvim.exe to be executed
 Dim gvim
-
-'# possible list of gvim.exe
-Dim gvims
-gvims = Array( _
-"C:\Program Files (x86)\Vim\vim81\gvim.exe", _
-"C:\Program Files (x86)\Vim\vim80\gvim.exe")
-
-'# select gvim.exe
-For Each file In gvims
-	If fs.FileExists(file) Then
-		gvim = file
-		Exit For
-	End If
-Next
+gvim = FindGvim(fs)
 
 '# assemble command line.
 Dim cmd
@@ -35,3 +22,30 @@ End If
 
 '# execute it.
 sh.Run(cmd)
+
+'# function to find gvim.exe path.
+Function FindGvim(fs)
+	Dim gvim_dirs
+	gvim_dirs = Array( _
+	"C:\Program Files\Vim", _
+	"C:\Program Files (x86)\Vim", _
+	"C:\opt\Vim")
+	Dim gvim_path
+	gvim_path = ""
+	For Each d In gvim_dirs
+		If fs.FolderExists(d) Then
+			Dim gvim_fs
+			Set gvim_fs = fs.GetFolder(d)
+			For Each s In gvim_fs.SubFolders
+				Dim f
+				f = s.Path & "\\" & "gvim.exe"
+				If fs.FileExists(f) Then
+					If StrComp(gvim_path, f) < 0 Then
+						gvim_path = f
+					End If
+				End If
+			Next
+		End If
+	Next
+	FindGvim = gvim_path
+End Function
