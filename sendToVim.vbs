@@ -20,8 +20,6 @@ Else
 	Next
 End If
 
-WScript.echo cmd
-
 '# execute it.
 sh.Run(cmd)
 
