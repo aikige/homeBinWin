@@ -16,9 +16,11 @@ If WScript.Arguments.Count = 0 Then
 Else
 	cmd = """" & gvim & """" & " --remote-silent "
 	For Each arg In WScript.Arguments
-		cmd = cmd & " " & arg
+		cmd = cmd & " """ & arg & """"
 	Next
 End If
+
+WScript.echo cmd
 
 '# execute it.
 sh.Run(cmd)
