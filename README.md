@@ -24,10 +24,30 @@ control sysdm.cpl
 
 ### sendToVim.vbs
 
-Script to open files in existing gVim window.
-Usually, it is used in shell:sendto entry.
+Script to open files in existing [GVim](https://www.vim.org/) window.
+Usually, it is used in shell:sendto entry in Windows system.
 
 ### dumpForegroundWindow.py
 
+```
+usage: dumpForegroundWindow.py [-h] [-i INTERVAL] [-s]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -i INTERVAL, --interval INTERVAL
+                        set interval of logging in seconds. default interval is 120
+  -s, --skip_duplicate  if this argument is set, skip logging of duplicated title
+```
+
 A python script to keep log of forground window, in Windows environment.
 This script will be convenient if you want to keep logging of your work-time.
+
+Other notes about features:
+
+
+* This scripts depends on [pywin32](https://pypi.org/project/pywin32/) package.
+	If your system dose not have the package, please install it using `pip install pywin32`.
+* Log uses markdown format.
+* Log filename is `YYYYMMDD-Window_Log.md`,
+	created on the working directory of the script,
+	and log file is changed every day.
