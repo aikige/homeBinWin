@@ -1,7 +1,7 @@
 Setup scripts
 =============
 
-This folder contains scripts which is used to setup scripts in [parent folder](../README.md).
+This folder contains scripts used to setup scripts in [parent folder](../README.md).
 
 ## Note about scripts
 
