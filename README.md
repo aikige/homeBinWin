@@ -1,7 +1,8 @@
 %USERPROFILE%\bin scripts for Windows Environment
 =================================================
 
-This folder stores utility script which I'm usually using in my Windows environment.
+This folder stores utility script which I'm usually using
+in my Windows environment.
 
 ## Setup
 
