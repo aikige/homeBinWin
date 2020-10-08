@@ -1,0 +1,44 @@
+@import 'default';
+/* エンコーディング判定のための文字列 */
+section {
+	width: 1280px;
+	height: 720px;
+	font-family: "Segoe UI", "メイリオ";
+	color: #444;
+    justify-content: start;	/* vertical align to top */
+	background-image: url(Background.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+
+section.title {
+    justify-content: center;	/* vertical align to top */
+	text-align: center;
+}
+
+section.detail {
+	font-size: 20px;
+}
+
+section::after {
+	font-size: 20px;
+	color: #888;
+	margin-right: 90px;
+}
+
+section.title > h1 {
+	color: #ff8200;
+}
+
+strong {
+	color: #ff8200;
+}
+
+footer {
+	width: 100%;
+	background-color: silver;
+	color: black;
+	text-align: left;
+	padding: 15px;
+	font-style: oblique;
+}
