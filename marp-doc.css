@@ -1,0 +1,52 @@
+@import 'default';
+/* エンコーディング判定のための文字列 */
+section {
+	/* A4 size */
+	width: 594pt;
+	height: 842pt;
+
+	font-family: "Segoe UI", "メイリオ";
+	font-size: 12pt;
+	color: #444;
+    justify-content: start;	/* vertical align to top */
+	background-repeat: no-repeat;
+	background-position: right top;
+	padding: 20pt;
+}
+
+section.title {
+    justify-content: center;	/* vertical align to center */
+	text-align: center;
+}
+
+section.detail {
+	font-size: 9pt;
+}
+
+/* Page number */
+section::after {
+	font-size: 9pt;
+}
+
+section.title > h1 {
+	color: #ff8200;	/* the corporate color */
+	margin-bottom: 24pt;
+}
+
+strong {
+	color: #ff8200;
+}
+
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+footer {
+	left: 80px;
+	width: 1120px;
+	text-align: center;
+	padding: 0;
+	font-size: 9pt;
+}
