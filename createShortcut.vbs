@@ -20,5 +20,8 @@ Set shortcut = sh.CreateShortcut(dst)
 With shortcut
 	.TargetPath = src.Path
 	.WorkingDirectory = src.ParentFolder
+	If WScript.Arguments.Count >= 2 Then
+		.Arguments = WScript.Arguments(2)
+	End If
 	.Save
 End With
