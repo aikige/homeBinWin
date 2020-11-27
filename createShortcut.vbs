@@ -1,10 +1,11 @@
 '# Script to create shortcut.
 '#
 '# Usage:
-'#	createShortcut.vbs SRC DST
+'#	createShortcut.vbs SRC DST [ARG]
 '# Where:
 '#  SRC: Source file for shortcut.
 '#  DST: Path of shortcut. DST should end by ".lnk".
+'#  ARG: Argument for the main program.
 '# Reference Used:
 '#  http://www.niji.or.jp/home/toru/notes/40.html
 

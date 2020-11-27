@@ -9,13 +9,15 @@ This folder contains scripts used to setup scripts in [parent folder](../README.
 
 Creates [`sendToVim.vbs`](../sendToVim.vbs) shortcut in `shell:sendto`.
 
-### `prepScreenSetup.bat`
+### `prepDisplayUtils.bat`
 
-1. Creates following shortcut of [`set_screen_resolution.bat`](../set_screen_resolution.bat) in `shell:start menu`.
+Creates display related utility shortcuts in `shell:start menu`.
+
+1. Display resolution changer, which uses [`set_screen_resolution.bat`](../set_screen_resolution.bat). 
     * `VGA`
     * `SVGA`
     * `XGA`
     * `Full HD`
-1. Creates following shortcut of `DisplaySwitch.exe` in  `shell:start menu`.
+1. Display mode changer, wich uses `DisplaySwitch.exe` as its backend.
     * `Display Clone`
     * `Display Extend`
