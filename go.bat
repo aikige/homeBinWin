@@ -20,3 +20,4 @@ goto end
 
 :end
 set GOPATH=
+title CMD - %CD%
