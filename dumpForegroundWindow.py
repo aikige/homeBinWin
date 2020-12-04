@@ -1,12 +1,15 @@
 import time
 import datetime
+import re
 from win32gui import GetWindowText, GetForegroundWindow
 
 def get_active_window_title():
     return GetWindowText(GetForegroundWindow())
 
 def get_log_string(title):
-    return datetime.datetime.now().strftime('* %Y%m%d-%H:%M:%S `') + title + '`'
+    # replace unusual spaces to normal space.
+    title = re.sub('[\u2000-\u200d]', ' ', title)
+    return "* %s `%s`" % (datetime.datetime.now().strftime('%Y%m%d-%H:%M:%S'), title)
 
 def format_date(date):
     return date.strftime("%Y%m%d")
