@@ -1,14 +1,17 @@
 import time
 import datetime
-import re
 from win32gui import GetWindowText, GetForegroundWindow
+
+def remove_unsupported_characters(string, encoding = 'cp932'):
+    # From string, remove characters which is not supported by specified encoding.
+    return string.encode(encoding, errors='ignore').decode(encoding)
 
 def get_active_window_title():
     return GetWindowText(GetForegroundWindow())
 
 def get_log_string(title):
     # replace unusual spaces to normal space.
-    title = re.sub('[\u2000-\u200d]', ' ', title)
+    title = remove_unsupported_characters(title)
     return "* %s `%s`" % (datetime.datetime.now().strftime('%Y%m%d-%H:%M:%S'), title)
 
 def format_date(date):
