@@ -7,7 +7,7 @@ set DST=%~s$GOPATH:1
 set GOPATH=
 if not x%DST%==x goto found
 
-for %%d in ( home doc memo ) do if "%%d" == "%~1" set DST=%%d
+for %%d in ( home back doc memo ) do if "%%d" == "%~1" set DST=%%d
 if not x%DST%==x goto %DST%
 
 pushd %~s1
@@ -19,6 +19,10 @@ goto end
 
 :found
 pushd %DST%
+goto end
+
+:back
+popd
 goto end
 
 :doc
