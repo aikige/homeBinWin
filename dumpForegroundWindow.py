@@ -10,7 +10,6 @@ def get_active_window_title():
     return GetWindowText(GetForegroundWindow())
 
 def get_log_string(title):
-    # replace unusual spaces to normal space.
     title = remove_unsupported_characters(title)
     return "* %s `%s`" % (datetime.datetime.now().strftime('%Y%m%d-%H:%M:%S'), title)
 
