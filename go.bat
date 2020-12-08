@@ -2,6 +2,10 @@
 
 if "x%~1"=="x" goto home
 
+set DST=%~1
+echo %DST% | findstr "^\." > NUL
+if not ERRORLEVEL 1 goto found
+
 set GOPATH=%HOMEDRIVE%%HOMEPATH%;%HOMEDRIVE%%HOMEPATH%\Documents
 set DST=%~s$GOPATH:1
 set GOPATH=
