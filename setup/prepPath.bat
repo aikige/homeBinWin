@@ -1,0 +1,1 @@
+powershell ..\addUserPath.ps1 ..
