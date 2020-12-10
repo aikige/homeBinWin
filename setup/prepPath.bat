@@ -1,1 +1,1 @@
-powershell ..\addUserPath.ps1 ..
+powershell ..\addUserPath.ps1 %~dp0\..
