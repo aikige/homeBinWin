@@ -13,12 +13,12 @@ pushd %USERPROFILE%
 git clone https://github.com/aikige/homeBinWin.git bin
 ```
 
-2. Open "System Property" dialog in Windows and add `%USERPROFILE%\bin`
-	to `PATH` environment variable.
-	Following command can be used to open the dialog.
+2. Add `%USERPROFILE%\bin` to `PATH` environment variable,
+    using script in `setup` directory.
 
 ```
-control sysdm.cpl
+cd setup
+prepPath.bat
 ```
 
 ## Important Scripts

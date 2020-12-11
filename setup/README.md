@@ -21,3 +21,7 @@ Creates display related utility shortcuts in `shell:start menu`.
 1. Display mode changer, wich uses `DisplaySwitch.exe` as its backend.
     * `Display Clone`
     * `Display Extend`
+
+### `prepPath.bat`
+
+Add parent directory to the `PATH` user environment.
