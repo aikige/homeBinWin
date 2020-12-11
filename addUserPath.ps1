@@ -10,16 +10,18 @@ https://docs.microsoft.com/ja-jp/dotnet/api/system.environment.setenvironmentvar
 $PathStr = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
 $PathArray = $PathStr.Split(";")
 $PathStr = [System.Environment]::GetEnvironmentVariable("PATH", "User")
-$PathArray += $PathStr.Split(";")
-$UserPathArray = $PathStr.Split(";")
+$UserPathArray = $PathStr.Split(";") -ne ""
+$PathArray += $UserPathArray
 echo "== Current Path =="
 $PathArray
+
 foreach ( $PathEntry in $PathArray ) {
 	if ( $PathEntry -eq $NewPath ) {
-		echo "Already Exist"
+		echo "== Already Exist =="
 		exit
 	}
 }
+
 $UserPathArray += $NewPath
 $PathStr = $UserPathArray -join ';'
 echo "== Updated Path =="
