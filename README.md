@@ -12,8 +12,8 @@ pushd %USERPROFILE%
 git clone https://github.com/aikige/homeBinWin.git bin
 ```
 
-2. Add `%USERPROFILE%\bin` to `PATH` environment variable,
-    using script in `setup` directory.
+2. Add `%USERPROFILE%\bin` to `PATH` environment variable.
+    There is script for the preparation, in `setup` directory.
 
 ```
 cd setup
@@ -55,3 +55,14 @@ Other notes about features:
 ### `createShortcut.vbs`
 
 Script to crate shortcut. Usually used in batch file.
+
+### `addUserPath.ps1`
+
+Script to add a path to user's `PATH` environment variable.
+For example:
+
+```
+powershell addUserPath.ps1 %SOME_DIR%
+```
+
+will add `%SOME_DIR%` to `PATH`, if `PATH` dose not include `%SOME_DIR%`.
