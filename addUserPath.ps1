@@ -8,7 +8,7 @@ https://docs.microsoft.com/ja-jp/dotnet/api/system.environment.getenvironmentvar
 https://docs.microsoft.com/ja-jp/dotnet/api/system.environment.setenvironmentvariable
 #>
 $PathStr = [System.Environment]::GetEnvironmentVariable("PATH", "Machine")
-$PathArray = $PathStr.Split(";")
+$PathArray = $PathStr.Split(";") -ne ""
 $PathStr = [System.Environment]::GetEnvironmentVariable("PATH", "User")
 $UserPathArray = $PathStr.Split(";") -ne ""
 $PathArray += $UserPathArray
