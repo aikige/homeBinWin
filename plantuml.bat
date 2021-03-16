@@ -9,6 +9,9 @@ if x%PLANTUML% == x (
 	exit /b
 )
 if x%~nx1 == x (
+	rem start javaw.exe -jar %PLANTUML% -charset UTF-8 -gui -tsvg
+	start javaw.exe -jar %PLANTUML% -charset UTF-8 -gui
+) else if x%~nx1 == x-tsvg (
 	start javaw.exe -jar %PLANTUML% -charset UTF-8 -gui -tsvg
 ) else (
 	java.exe -jar %PLANTUML% -charset UTF-8 %*

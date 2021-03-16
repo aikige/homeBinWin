@@ -34,17 +34,17 @@ def log_active_window(interval, skip_duplicate):
     """
     day = format_date(datetime.datetime.today())
     old = ""
-    with open(get_log_filename(day), "a", encoding="UTF-8", errors="ignore") as f:
-        while day == format_date(datetime.datetime.now()):
-            title = get_active_window_title()
-            if (skip_duplicate == True and title == old):
-                continue
-            out = get_log_string(title)
-            print(out)
+    while day == format_date(datetime.datetime.now()):
+        title = get_active_window_title()
+        if (skip_duplicate == True and title == old):
+            continue
+        out = get_log_string(title)
+        print(out)
+        with open(get_log_filename(day), "a", encoding="UTF-8", errors="ignore") as f:
             f.write(out + "\n")
             f.flush()
-            time.sleep(interval)
-            old = title
+        time.sleep(interval)
+        old = title
 
 def keep_logging(interval, skip_duplicate):
     while True:
