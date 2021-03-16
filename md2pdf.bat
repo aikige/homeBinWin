@@ -7,9 +7,7 @@ REM - Background.png: background image.
 setlocal
 set BG_IMAGE=Background.png
 set WORK_DIR=%~dp0
-
-set MDFILE=%1
-shift
+set FORMAT=--pdf
 
 REM select layout
 if x%1 == x-doc (
@@ -22,11 +20,14 @@ if x%1 == x-doc (
 REM watch option
 if x%1 == x-w (
 	set WATCH=-w
+    set FORMAT=--html
 	shift
 )
 
-if not exist %CSS% if exist %WORK_DIR%\%CSS% set CSS=%WORK_DIR%\%CSS%
+set MDFILES=%*
+
+if not exist %CSS% if exist %WORK_DIR%\%CSS% mklink /h %CSS% %WORK_DIR%\%CSS%
 if not exist %BG_IMAGE% if exist %WORK_DIR%\%BG_IMAGE% mklink /h %BG_IMAGE% %WORK_DIR%\%BG_IMAGE% 
 
-marp --allow-local-files %WATCH% --theme %CSS% --pdf %MDFILE%
+marp --allow-local-files %WATCH% --html --theme %CSS% %FORMAT% %MDFILES%
 endlocal
