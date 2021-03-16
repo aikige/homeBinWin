@@ -35,5 +35,6 @@ This script shall be executed on command prompt with Administrator's privilege.
 This script works on Windows 10 which includes Group Policy editor. In other words, the script dose not work on Windows 10 Home Edition.
 
 Basically, the script executes following:
-- Register scheduler event which is invoked for Security Audit event ID=4800 (Lock) and ID=4801 (Unlock).
-- Enable logging of Logon and Logoff related Security Audit event.
+- Register scheduler event which is invoked for Security Audit event ID=4800 (Lock) and ID=4801 (Unlock),
+  using [`schtasks`](https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/schtasks) command.
+- Enable logging of Logon and Logoff related Security Audit event, using [`auditpol /set`](https://docs.microsoft.com/windows-server/administration/windows-commands/auditpol-set) command.
