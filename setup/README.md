@@ -26,15 +26,29 @@ Creates display related utility shortcuts in `shell:start menu`.
 
 Add parent directory to the `PATH` user environment.
 
-### `prepLockLogging.bat`
+Since this script is using PowerShell as backend, please check instruciton regarding [Preparation to use PowerShell Scripts](#preparation-to-use-powershell-scripts).
 
-Script to enable logging for Windows Lock and Unlock.
+### `prepLockLogging.bat` and `prepLockLogging.ps1`
 
-This script shall be executed on command prompt with Administrator's privilege.
+`prepLockLogging.bat` is used to enable logging for Windows Lock and Unlock.
 
-This script works on Windows 10 which includes Group Policy editor. In other words, the script dose not work on Windows 10 Home Edition.
+1. This script shall be executed on command prompt with Administrator's privilege.
+1. Since this script is using PowerShell as backend, please check instruciton regarding [Preparation to use PowerShell Scripts](#preparation-to-use-powershell-scripts).
+1. Actual scheduled task registration is implmented by `prepLockLogging.ps1`.
 
-Basically, the script executes following:
-- Register scheduler event which is invoked for Security Audit event ID=4800 (Lock) and ID=4801 (Unlock),
-  using [`schtasks`](https://docs.microsoft.com/ja-jp/windows-server/administration/windows-commands/schtasks) command.
-- Enable logging of Logon and Logoff related Security Audit event, using [`auditpol /set`](https://docs.microsoft.com/windows-server/administration/windows-commands/auditpol-set) command.
+Reference:
+
+* Microsoft TechNet > [Schedule task with trigger "on workstation Lock"](https://social.technet.microsoft.com/Forums/en-US/2263c5a7-41d4-4c64-96ee-46437aba1a85/)
+* Microsoft | Docs > [Windows/Apps/Win32/Server Technologies/Windows Server/Task Scheduler/Trigger object](https://docs.microsoft.com/windows/win32/taskschd/trigger)
+
+## Preparation to use PowerShell Scripts
+
+To use PowerShell scripts, you may need to change [Execution Policy](https://docs.microsoft.com/powershell/scripting/learn/ps101/01-getting-started#execution-policy) of PowerShell.
+
+1. Please start powershell with Administrator's privilege.
+1. Please check if you are allowed to executed script: `get-executionpolicy`.
+1. If result is `Restricted`, enable execution: `set-executionpolicy remotesigned`.
+
+Reference:
+
+* Microsoft | Docs > [Getting Started with PowerShell > Execution Policy](https://docs.microsoft.com/powershell/scripting/learn/ps101/01-getting-started#execution-policy)
