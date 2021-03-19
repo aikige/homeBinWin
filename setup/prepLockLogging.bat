@@ -1,1 +1,1 @@
-@powershell .\prepLockLogging.ps1
+@py .\prepLockLogging.py
