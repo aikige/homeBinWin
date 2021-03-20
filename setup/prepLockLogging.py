@@ -23,7 +23,6 @@ def register_task(scheduler, state_change, task_name, command, arguments):
             TASK_CREATE_OR_UPDATE, NO_USER, NO_PASSWORD, TASK_LOGON_NONE)
 
 script = os.path.abspath('..\log.bat')
-print(script)
 scheduler = win32com.client.Dispatch('Schedule.Service')
 scheduler.Connect()
 
