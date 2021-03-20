@@ -34,6 +34,8 @@ Since this script is using PowerShell as backend, please check instruciton regar
 
 1. This script shall be executed on command prompt with Administrator's privilege.
 1. Actual scheduled task registration is implmented by `prepLockLogging.py`.
+    * this script depends on `win32com` in [pywin32](https://pypi.org/project/pywin32/) extension.
+      If your system dose not have the package, please install it using `pip install pywin32`.
 
 Reference:
 
