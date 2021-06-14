@@ -42,7 +42,6 @@ def log_active_window(interval, skip_duplicate):
         print(out)
         with open(get_log_filename(day), "a", encoding="UTF-8", errors="ignore") as f:
             f.write(out + "\n")
-            f.flush()
         time.sleep(interval)
         old = title
 
