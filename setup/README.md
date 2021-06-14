@@ -28,13 +28,14 @@ Add parent directory to the `PATH` user environment.
 
 Since this script is using PowerShell as backend, please check instruciton regarding [Preparation to use PowerShell Scripts](#preparation-to-use-powershell-scripts).
 
-### `prepLockLogging.bat` and `prepLockLogging.ps1`
+### `prepLockLogging.bat` and `prepLockLogging.py`
 
 `prepLockLogging.bat` is used to enable logging for Windows Lock and Unlock.
 
 1. This script shall be executed on command prompt with Administrator's privilege.
-1. Since this script is using PowerShell as backend, please check instruciton regarding [Preparation to use PowerShell Scripts](#preparation-to-use-powershell-scripts).
-1. Actual scheduled task registration is implmented by `prepLockLogging.ps1`.
+1. Actual scheduled task registration is implmented by `prepLockLogging.py`.
+    * this script depends on `win32com` in [pywin32](https://pypi.org/project/pywin32/) extension.
+      If your system dose not have the package, please install it using `pip install pywin32`.
 
 Reference:
 
