@@ -47,5 +47,15 @@ Function FindGvim(fs)
 			Next
 		End If
 	Next
+	If gvim_path = "" Then
+		gvim_paths = Array( _
+		"C:\Windows\gvim.bat")
+		For Each f in gvim_paths
+			If fs.FileExists(f) Then
+				gvim_path = f
+				Exit For
+			End If
+		Next
+	End If
 	FindGvim = gvim_path
 End Function
