@@ -1,4 +1,7 @@
-$NewPath = Resolve-Path($args[0])
+echo "== Argument =="
+[string]$args
+
+$NewPath = Resolve-Path([string]$args)
 echo "== New Item =="
 [string]$NewPath
 
