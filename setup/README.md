@@ -53,3 +53,15 @@ To use PowerShell scripts, you may need to change [Execution Policy](https://doc
 Reference:
 
 * Microsoft | Docs > [Getting Started with PowerShell > Execution Policy](https://docs.microsoft.com/powershell/scripting/learn/ps101/01-getting-started#execution-policy)
+
+## Other assets for setup your computer
+
+### `caps2ctrl.reg` and `remove_caps2ctrl.reg`
+
+* `caps2ctrl.reg` is registry file which imports setting to use "Caps lock" key as "Ctrl(Left)".
+    * Usage (for those who is not using Administrators account):
+        1. Please run Registry Editor (`regedit.exe`) with Administrators privilege.
+        1. Import this file.
+    * Usage (for those who is using Administrators account):
+        1. Please simply run this file.
+* `remove_caps2ctrl.reg` can be used to remove registry setting imported by `caps2ctrl.reg`.
