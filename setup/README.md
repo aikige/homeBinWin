@@ -65,3 +65,7 @@ Reference:
     * Usage (for those who is using Administrators account):
         1. Please simply run this file.
 * `remove_caps2ctrl.reg` can be used to remove registry setting imported by `caps2ctrl.reg`.
+
+Reference:
+
+* [Windows で Caps キーに Ctrl を割り当てる方法](https://loumo.jp/archives/25374)
