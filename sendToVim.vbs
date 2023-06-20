@@ -27,8 +27,9 @@ sh.Run(cmd)
 Function FindGvim(fs)
 	Dim gvim_dirs
 	gvim_dirs = Array( _
-	"C:\Program Files\Vim", _
 	"C:\Program Files (x86)\Vim", _
+	"C:\Program Files\Vim", _
+	"C:\tools\vim", _
 	"C:\opt\Vim")
 	Dim gvim_path
 	gvim_path = ""
