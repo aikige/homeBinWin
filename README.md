@@ -23,7 +23,7 @@ prepPath.bat
 
 ## Important Scripts
 
-### `sendToVim.vbs`
+### `sendToVim.ps1`
 
 Script to open files in existing [GVim](https://www.vim.org/) window.
 Usually, it is used as `shell:sendto` entry in Windows system.
@@ -53,7 +53,7 @@ Other notes about features:
 	created on the working directory of the script,
 	and log file is changed every day.
 
-### `createShortcut.vbs`
+### `createShortcut.ps1`
 
 Script to crate shortcut. Usually used in batch file.
 
