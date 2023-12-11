@@ -1,6 +1,6 @@
 $ws =  New-Object -ComObject WScript.Shell
 if ($args.Length -lt 2) {
-	Write-Host "Need 2 arguments: LINK TARGET ARGS"
+	echo "Need 2 arguments: LINK_NAME TARGET_PROGRAM ARGS"
 	exit
 }
 if ($args[0] -eq '-m') {
