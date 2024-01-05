@@ -47,7 +47,7 @@ Other notes about features:
 
 
 * This scripts depends on [pywin32](https://pypi.org/project/pywin32/) package.
-	If your system dose not have the package, please install it using `pip install pywin32`.
+	If your system does not have the package, please install it using `pip install pywin32`.
 * Log uses markdown format.
 * Log filename is `YYYYMMDD-Window_Log.md`,
 	created on the working directory of the script,
@@ -66,4 +66,4 @@ For example:
 powershell addUserPath.ps1 %SOME_DIR%
 ```
 
-will add `%SOME_DIR%` to `PATH`, if `PATH` dose not include `%SOME_DIR%`.
+will add `%SOME_DIR%` to `PATH`, if `PATH` does not include `%SOME_DIR%`.
