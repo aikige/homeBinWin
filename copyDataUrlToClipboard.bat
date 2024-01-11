@@ -1,5 +1,5 @@
 @echo off
 setlocal
-path %USERPROFILE%\bin;%PATH%
+path %~dp0;%PATH%
 copyDataUrlToClipboard.pyw %*
 endlocal
