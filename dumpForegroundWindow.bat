@@ -4,5 +4,5 @@ path %USERPROFILE%\bin;%PATH%
 set MEMODIR=%USERPROFILE%\Documents\Log
 if not exist %MEMODIR% mkdir %MEMODIR%
 pushd %MEMODIR%
-dumpForegroundWindow.py
+dumpForegroundWindow.pyw %*
 endlocal

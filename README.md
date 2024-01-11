@@ -28,26 +28,37 @@ prepPath.bat
 Script to open files in existing [GVim](https://www.vim.org/) window.
 Usually, it is used as `shell:sendto` entry in Windows system.
 
-### `dumpForegroundWindow.py`
+### `dumpForegroundWindow.pyw`
 
-```
-usage: dumpForegroundWindow.py [-h] [-i INTERVAL] [-s]
+```text
+usage: dumpForegroundWindow.pyw [-h] [-k] [-i INTERVAL] [-s] [-v] [message]
 
-optional arguments:
+positional arguments:
+  message               addtional message stored with window title
+
+options:
   -h, --help            show this help message and exit
+  -k, --keep_logging    if this argument is set, keep logging
   -i INTERVAL, --interval INTERVAL
                         set interval of logging in seconds. default interval is 120
-  -s, --skip_duplicate  if this argument is set, title is logged only when it is different from previous log.
+  -s, --skip_duplicate  if this argument is set, skip logging of duplicated title
+  -v, --verbose         show log to standard output also
 ```
 
-A python script to keep log of foreground window title, in Windows environment.
+The script captures foreground window title and stores it to the log file.
+
+When script is started with `--keep_logging` option,
+it keeps logging of foreground window title,
+with interval specified by `--interval` option.
 This script will be convenient if you want to keep logging of your work-time.
 
 Other notes about features:
 
-
 * This scripts depends on [pywin32](https://pypi.org/project/pywin32/) package.
-	If your system does not have the package, please install it using `pip install pywin32`.
+	If your system does not have the package, please install it.
+    ```
+    pip install pywin32
+    ```
 * Log uses markdown format.
 * Log filename is `YYYYMMDD-Window_Log.md`,
 	created on the working directory of the script,
