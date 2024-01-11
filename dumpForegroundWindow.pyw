@@ -24,7 +24,7 @@ def get_log_filename(date):
 def log_active_window(verbose = False, message = '', prev_title = None, date_string = format_date()):
     title = get_active_window_title()
     if (prev_title == title):
-        return
+        return title
     out = get_log_string(title, message)
     if verbose:
         print(out)
