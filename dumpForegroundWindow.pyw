@@ -73,10 +73,11 @@ if __name__ == '__main__':
     parser.add_argument('-v', '--verbose',
             action='store_true', default=False,
             help='show log to standard output also')
-    parser.add_argument('message', nargs='?', default='',
+    parser.add_argument('message', nargs='*', default=[],
             help='addtional message stored with window title')
     args = parser.parse_args()
+    message = ' '.join(args.message)
     if args.keep_logging:
-        keep_logging(args.interval, args.skip_duplicate, args.verbose, args.message);
+        keep_logging(args.interval, args.skip_duplicate, args.verbose, message);
     else:
-        log_active_window(args.verbose, args.message);
+        log_active_window(args.verbose, message);
