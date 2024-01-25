@@ -21,14 +21,14 @@ def format_date():
 def get_log_filename(date):
     return date + "-Window_Log.md"
 
-def log_active_window(verbose = False, message = '', prev_title = None, date_string = format_date()):
+def log_active_window(verbose = False, message = '', prev_title = None, filename = get_log_filename(format_date())):
     title = get_active_window_title()
     if (prev_title == title):
         return title
     out = get_log_string(title, message)
     if verbose:
         print(out)
-    with open(get_log_filename(date_string), "a", encoding="UTF-8", errors="ignore") as f:
+    with open(filename, "a", encoding="UTF-8", errors="ignore") as f:
         f.write(out + "\n")
     return title
 
@@ -51,15 +51,16 @@ def keep_logging(interval, skip_duplicate, verbose, message):
     """
     while True:
         date_string = format_date()
+        log_filename = get_log_filename(date_string)
         prev_title = None
         while date_string == format_date():
-            title = log_active_window(verbose, message, prev_title, date_string)
+            title = log_active_window(verbose, message, prev_title, log_filename)
             if skip_duplicate:
                 prev_title = title
             time.sleep(interval)
 
 if __name__ == '__main__':
-    import argparse
+    import argparse, sys
     parser = argparse.ArgumentParser()
     parser.add_argument('-k', '--keep_logging',
             help='if this argument is set, keep logging',
@@ -76,6 +77,9 @@ if __name__ == '__main__':
     parser.add_argument('message', nargs='*', default=[],
             help='addtional message stored with window title')
     args = parser.parse_args()
+    if sys.stdout == None:
+        # this will happen when script is invoked by pythonw.
+        args.verbose = False
     message = ' '.join(args.message)
     if args.keep_logging:
         keep_logging(args.interval, args.skip_duplicate, args.verbose, message);
