@@ -77,7 +77,7 @@ if __name__ == '__main__':
     parser.add_argument('message', nargs='*', default=[],
             help='addtional message stored with window title')
     args = parser.parse_args()
-    if sys.stdout == None:
+    if not sys.stdout:
         # this will happen when script is invoked by pythonw.
         args.verbose = False
     message = ' '.join(args.message)
