@@ -22,10 +22,10 @@ $ErrorActionPreference = "continue"
 $ENV:PATH = "$vimpath;" + $ENV:PATH
 
 if ($args.Length -eq 0) {
-	Start-Process -FilePath 'gvim' -ArgumentList '--remote-silent .'
+	Start-Process -NoNewWindow -FilePath 'gvim' -ArgumentList '--remote-silent .'
 } else {
 	foreach ($arg in $args) {
 		$argumentlist = ' --remote-silent "' + $arg + '"'
-		Start-Process -FilePath 'gvim' -ArgumentList $argumentlist
+		Start-Process -NoNewWindow -FilePath 'gvim' -ArgumentList $argumentlist
 	}
 }
