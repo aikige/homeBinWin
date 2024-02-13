@@ -3,13 +3,13 @@ if ($args.Length -eq 0) {
 	echo "Argument is required"
 	exit
 }
-foreach ($arg in $args) {
-	write-host "Checking DLL $arg..."
-	foreach ($p in Get-Process)
+echo "Check process uses $args"
+foreach ($p in Get-Process)
+{
+	#echo "Checking process $p..."
+	foreach ($m in $p.modules)
 	{
-		#echo "Checking process $p..."
-		foreach ($m in $p.modules)
-		{
+		foreach ($arg in $args) {
 			if ( $m.FileName -match $arg)
 			{
 				write-host "Found:" $m.FileName "in" $p.Name "ID:" $p.id
