@@ -78,3 +78,14 @@ powershell addUserPath.ps1 %SOME_DIR%
 ```
 
 will add `%SOME_DIR%` to `PATH`, if `PATH` does not include `%SOME_DIR%`.
+
+### `findDllUsers.ps1` and `findDllUsers.bat`
+
+Following command tells you which processes are using specified DLL.
+
+```
+powershell `findDllUsers.ps1` %DLL_NAME%
+```
+
+The script is based on following site:
+- [Scripted method to find and kill process using a specific dll](https://stackoverflow.com/questions/54310513/)
