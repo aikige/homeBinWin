@@ -4,17 +4,18 @@ where rm.exe > nul
 if %ERRORLEVEL% == 0 goto rm
 
 call :find bash.exe
-if x%BASH%==x goto del
+if not x%BASH%==x goto bash
+
+:del
+REM if no rm.exe found, use del command instead.
+echo execute "del %*"
+del %*
+goto end
 
 :bash
 echo execute "rm %*" on %BASH%
 %BASH% -c "rm %*"
 endlocal
-goto end
-
-:del
-echo execute "del %*"
-del %*
 goto end
 
 :rm
