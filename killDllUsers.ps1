@@ -9,7 +9,8 @@ foreach ($p in Get-Process) {
 	foreach ($m in $p.modules) {
 		foreach ($arg in $args) {
 			if ($m.FileName -match $arg) {
-				write-host "Found:" $m.FileName "in" $p.Name "ID:" $p.id
+				write-host "Kill:" $m.FileName "in" $p.Name "ID:" $p.id
+				stop-process -Id $p.id -Force
 			}
 		}
 	}
