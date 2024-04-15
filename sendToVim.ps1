@@ -1,3 +1,4 @@
+# $dirs is the list of vim install folder, ordered by preference.
 $dirs = @()
 # Scoop
 $dirs += $Env:USERPROFILE + '\scoop\apps\vim\current'
@@ -9,6 +10,8 @@ $dirs += 'C:\opt\vim'
 $dirs += 'C:\Program Files\Vim'
 $dirs += 'C:\Program Files (x86)\Vim'
 $vimpath = 'C:\Windows'
+
+# Select vim from directory list.
 $ErrorActionPreference = "silentlycontinue"
 foreach ($dir in $dirs) {
 	if (Test-Path $dir + '\gvim.exe') {
