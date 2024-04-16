@@ -10,10 +10,10 @@ $dirs += 'C:\opt\vim'
 $dirs += 'C:\Program Files\Vim'
 $dirs += 'C:\Program Files (x86)\Vim'
 # Default location
-$vimpath = 'C:\Windows'
+$dirs += 'C:\Windows'
 
 # Select vim from directory list.
-function find_vimpath($dirs, $default) {
+function find_vimpath($dirs) {
 	foreach ($dir in $dirs) {
 		# Check if the directory exists.
 		if (!(Test-Path $dir)) {
@@ -32,7 +32,7 @@ function find_vimpath($dirs, $default) {
 			}
 		}
 	}
-	return $default
+	Write-Error -Message "gvim.exe not found" -ErrorAction Stop 
 }
 $vimpath = find_vimpath $dirs $vimpath
 
