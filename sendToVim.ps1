@@ -9,24 +9,32 @@ $dirs += 'C:\opt\vim'
 # Standard location
 $dirs += 'C:\Program Files\Vim'
 $dirs += 'C:\Program Files (x86)\Vim'
+# Default location
 $vimpath = 'C:\Windows'
 
 # Select vim from directory list.
-$ErrorActionPreference = "silentlycontinue"
-foreach ($dir in $dirs) {
-	if (Test-Path $dir + '\gvim.exe') {
-		# The directory has gvim.exe inside.
-		$vimpath = $dir
-		break
+function find_vimpath($dirs, $default) {
+	foreach ($dir in $dirs) {
+		# Check if the directory exists.
+		if (!(Test-Path $dir)) {
+			continue
+		}
+		# Check if the directory has gvim.exe inside.
+		if (Test-Path ($dir + '\gvim.exe')) {
+			return $dir
+		}
+		# Check if the sub-directory has gvim.exe inside.
+		$vimdirs = Get-ChildItem -Path $dir -Filter vim* | Sort-Object -Descending
+		foreach ($vimdir in $vimdirs) {
+			$vimdir = $dir + '\' + $vimdir
+			if (Test-Path ($vimdir + '\gvim.exe')) {
+				return $vimdir
+			}
+		}
 	}
-	$dirs = Get-ChildItem -Path $dir -Filter vim* | Sort-Object -Descending
-	if ($dirs.Length -gt 1) {
-		# The directory has vimXX subfolder.
-		$vimpath = $dir + '\' + $dirs[0]
-		break
-	}
+	return $default
 }
-$ErrorActionPreference = "continue"
+$vimpath = find_vimpath $dirs $vimpath
 
 $ENV:PATH = "$vimpath;" + $ENV:PATH
 
