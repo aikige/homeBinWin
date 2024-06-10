@@ -34,15 +34,37 @@ function find_vimpath($dirs) {
 	}
 	Write-Error -Message "gvim.exe not found" -ErrorAction Stop 
 }
-$vimpath = find_vimpath $dirs $vimpath
 
+# Restore space separated absolute path.
+function restore_absolute_path($files) {
+	$found_files = @()
+	foreach ($file in $files) {
+		if (Split-Path $file -IsAbsolute) {
+			$found_files += $file
+			continue
+		} else {
+			$found_files[-1] += ' ' + $file
+		}
+	}
+	return $found_files
+}
+
+$vimpath = find_vimpath $dirs $vimpath
 $ENV:PATH = "$vimpath;" + $ENV:PATH
 
 if ($args.Length -eq 0) {
 	Start-Process -NoNewWindow -FilePath 'gvim' -ArgumentList '--remote-silent .'
 } else {
-	foreach ($arg in $args) {
-		$argumentlist = ' --remote-silent "' + $arg + '"'
+	if ($args[0] -eq '-a') {
+		# For shell:sendto: absolute path reconstruction.
+		$null, $args = $args
+		$files = restore_absolute_path $args
+	} else {
+		# Called from command line.
+		$files = $args
+	}
+	foreach ($file in $files) {
+		$argumentlist = ' --remote-silent "' + $file + '"'
 		Start-Process -NoNewWindow -FilePath 'gvim' -ArgumentList $argumentlist
 	}
 }
