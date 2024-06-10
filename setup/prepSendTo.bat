@@ -1,4 +1,4 @@
-call :createPS1Link GVim.lnk ..\sendToVim.ps1
+call :createPS1Link GVim.lnk ..\sendToVim.ps1 -a
 exit /b
 
 :createPS1Link
