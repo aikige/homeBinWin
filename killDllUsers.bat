@@ -1,1 +1,1 @@
-@powershell "%~dp0\killDllUsers.ps1" %*
+@powershell -File "%~dp0\killDllUsers.ps1" %*
