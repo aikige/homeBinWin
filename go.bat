@@ -2,39 +2,51 @@
 
 if "x%~1"=="x" goto home
 
-set DST=%~s1
-if exist %DST% goto found
-
-set GOPATH=%HOMEDRIVE%%HOMEPATH%;%HOMEDRIVE%%HOMEPATH%\Documents
-set DST=%~s$GOPATH:1
+set GOPATH=.;%USERPROFILE%;%USERPROFILE%\Documents
+set DST=%~$GOPATH:1
 set GOPATH=
-if not x%DST%==x goto found
+if exist "%DST%" goto found
 
-for %%d in ( home back doc memo ) do if "%%d" == "%~1" set DST=%%d
-if not x%DST%==x goto %DST%
+REM check labels
+for %%d in ( home back doc memo git_root ) do if "%%d" == "%~1" goto %%d
 
-pushd %~s1
-goto end
-
-:home
-pushd %HOMEDRIVE%%HOMEPATH%
+REM fall through
+:not_found
+echo not found: %~1
 goto end
 
 :found
-pushd %DST%
+echo found: %DST%
+pushd "%DST%"
 goto end
 
 :back
 popd
 goto end
 
+:home
+pushd %USERPROFILE%
+goto end
+
 :doc
-pushd %HOMEDRIVE%%HOMEPATH%\Documents
+pushd %USERPROFILE%\Documents
 goto end
 
 :memo
-pushd %HOMEDRIVE%%HOMEPATH%\Documents\Memo
+pushd %USERPROFILE%\Documents\Memo
 goto end
+
+:git_root
+set DST=%CD%
+:check_git_root
+REM if .git is exist, that is the root folder of repository.
+if exist "%DST%\.git" goto found
+REM if DST is a root folder (length of DST is 3), finish search.
+if "%DST:~3,1%" == "" goto not_found
+pushd "%DST%\.."
+set DST=%CD%
+popd
+goto check_git_root
 
 :end
 set DST=
