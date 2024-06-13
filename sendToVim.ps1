@@ -36,6 +36,7 @@ function find_vimpath($dirs) {
 }
 
 # Restore space separated absolute path.
+# This logic is not required in most of cases.
 function restore_absolute_path($files) {
 	$found_files = @()
 	foreach ($file in $files) {
