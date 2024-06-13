@@ -8,7 +8,7 @@ set GOPATH=
 if exist "%DST%" goto found
 
 REM check labels
-for %%d in ( home back doc memo git_root ) do if "%%d" == "%~1" goto %%d
+for %%d in ( home back doc git_root ) do if "%%d" == "%~1" goto %%d
 
 REM fall through
 :not_found
@@ -30,10 +30,6 @@ goto end
 
 :doc
 pushd %USERPROFILE%\Documents
-goto end
-
-:memo
-pushd %USERPROFILE%\Documents\Memo
 goto end
 
 :git_root
