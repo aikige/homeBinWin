@@ -1,17 +1,15 @@
 @echo off
 if "%~1" == "" (
     call :check_upgradable
+) else if "%~1" == "vim" (
+    call :update_vim
 ) else (
     call :exec_upgrade %*
 )
 goto :eof
 
 :exec_upgrade
-if "%1" == "vim" (
-    call :update_vim
-) else (
-    choco upgrade -y %*
-)
+choco upgrade -y %*
 exit /b
 
 :update_vim
