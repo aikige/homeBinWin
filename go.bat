@@ -2,13 +2,13 @@
 
 if "x%~1"=="x" goto home
 
-set GOPATH=.;%USERPROFILE%;%USERPROFILE%\Documents
+set GOPATH=.;%USERPROFILE%;%USERPROFILE%\Documents;%OneDrive%
 set DST=%~$GOPATH:1
 set GOPATH=
 if exist "%DST%" goto found
 
 REM check labels
-for %%d in ( home back doc git_root ) do if "%%d" == "%~1" goto %%d
+for %%d in ( home back doc pic git_root ) do if "%%d" == "%~1" goto %%d
 
 REM fall through
 :not_found
@@ -30,6 +30,10 @@ goto end
 
 :doc
 pushd %USERPROFILE%\Documents
+goto end
+
+:pic
+pushd %USERPROFILE%\Pictures
 goto end
 
 :git_root
