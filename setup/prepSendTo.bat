@@ -1,4 +1,5 @@
 call :createPS1Link GVim.lnk "%~dp0\..\sendToVim.ps1"
+call :createPS1Link copyFilename.lnk "%~dp0\..\copyFilename.ps1"
 call :createLink copyDataUrlToClipboard.lnk "%~dp0\..\copyDataUrlToClipboard.pyw"
 exit /b
 
