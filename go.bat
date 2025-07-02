@@ -3,6 +3,8 @@
 if "x%~1"=="x" goto home
 
 set GOPATH=.;%USERPROFILE%;%USERPROFILE%\Documents;%OneDrive%
+if exist "%~dp0/_gopath.bat" call "%~dp0/_gopath.bat"
+if exist "%CD%/_gopath.bat" call "%CD%/_gopath.bat"
 set DST=%~$GOPATH:1
 set GOPATH=
 if exist "%DST%" goto found
