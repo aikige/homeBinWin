@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 import time
 import os
-import sys
+#import sys
 
+# Clear the terminal screen
 os.system('cls' if os.name == 'nt' else 'clear')
+
 try:
     while True:
         # Clear the terminal screen
@@ -13,8 +15,9 @@ try:
         current_time = time.strftime('%Y-%m-%d %H:%M:%S %a')
         
         # Print current time
-        sys.stdout.write(f"\rCurrent Time: {current_time}")
-        sys.stdout.flush()
+        #sys.stdout.write(f"\rCurrent Time: {current_time}")
+        #sys.stdout.flush()
+        print(f"\rCurrent Time: {current_time}", end='')
         
         # Wait for 1 second
         time.sleep(1)
