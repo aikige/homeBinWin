@@ -40,15 +40,11 @@ goto end
 
 :git_root
 set DST=%CD%
-:check_git_root
-REM if .git is exist, that is the root folder of repository.
-if exist "%DST%\.git" goto found
-REM if DST is a root folder (length of DST is 3), finish search.
-if "%DST:~3,1%" == "" goto not_found
-pushd "%DST%\.."
-set DST=%CD%
-popd
-goto check_git_root
+for /f "delims=" %%a in ('git rev-parse --show-toplevel') do (
+    set DST=%%a
+    goto found
+)
+goto end
 
 :end
 set DST=
