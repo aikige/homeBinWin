@@ -14,7 +14,8 @@ try:
         # Get current time
         current_time = time.strftime('%Y-%m-%d %H:%M:%S %a')
         
-        # Print current time
+        # Print current time.
+        # Use a CR to continuously display the clock on the same line.
         #sys.stdout.write(f"\rCurrent Time: {current_time}")
         #sys.stdout.flush()
         print(f"\rCurrent Time: {current_time}", end='')
