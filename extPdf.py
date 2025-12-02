@@ -3,26 +3,26 @@ from pypdf import PdfReader, PdfWriter
 
 def extract_pages(input_pdf_path, output_pdf_path, pages_to_extract):
     """
-    PDFから指定したページだけを抜き出して新しいPDFを作成する関数。
+    Function to extract specified page from a PDF and create new one.
 
-    :param input_pdf_path: 元のPDFファイルパス
-    :param output_pdf_path: 抽出後の新しいPDFファイルパス
-    :param pages_to_extract: 抜き出すページ番号のリスト（1始まり）
+    :param input_pdf_path: Path of the original PDF file.
+    :param output_pdf_path: Path of the new PDF file.
+    :param pages_to_extract: List of pages to be extracted (one-based indexing).
     """
     reader = PdfReader(input_pdf_path)
     writer = PdfWriter()
 
-    # ページ番号は0始まりなので調整
+    # Adjust page number since array `pages` is zero-based indexing.
     for page_num in pages_to_extract:
         if 1 <= page_num <= len(reader.pages):
             writer.add_page(reader.pages[page_num - 1])
         else:
-            print(f"警告: ページ番号 {page_num} は範囲外です。")
+            print(f"Warning: page number {page_num} is out of range.")
 
     with open(output_pdf_path, "wb") as output_pdf:
         writer.write(output_pdf)
 
-    print(f"{len(pages_to_extract)}ページを抽出し、{output_pdf_path} に保存しました。")
+    print(f"Extracted {len(pages_to_extract)} pages, and stored to {output_pdf_path}.")
 
 if __name__=="__main__":
     import argparse
