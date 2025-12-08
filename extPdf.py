@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from pypdf import PdfReader, PdfWriter
+import re
 
 def extract_pages(input_pdf_path, output_pdf_path, pages_to_extract):
     """
@@ -15,7 +16,7 @@ def extract_pages(input_pdf_path, output_pdf_path, pages_to_extract):
 
     # Create list of pages.
     for p in pages_to_extract:
-        if '-' in p:
+        if re.match('[0-9]+-[0-9]+', p):
             [start, end] = map(int, p.split('-'))
             pages += list(range(start, end + 1))
         else:
