@@ -36,9 +36,14 @@ def extract_pages(input_pdf_path, output_pdf_path, pages_to_extract):
 
 if __name__=="__main__":
     import argparse
-    parser = argparse.ArgumentParser(description='A simple program which creates PDF subset')
-    parser.add_argument('input_file', help='The input file to be cropped')
-    parser.add_argument('output_file', help='The output file which stores cropped PDF')
-    parser.add_argument('page', nargs='+', help='page (e.g. 2) or range (e.g. 1-5) of pages to be extracted')
+    parser = argparse.ArgumentParser(
+            description='A simple program which creates PDF subset')
+    parser.add_argument('input',
+            help='The input file to be cropped')
+    parser.add_argument('-o', '--output', default='output.pdf',
+            help='The output file which stores cropped PDF. Default value is "output.pdf"')
+    parser.add_argument('page', nargs='+',
+            help='page (e.g. 2) or range (e.g. 1-5) of pages to be extracted')
     args = parser.parse_args()
-    extract_pages(args.input_file, args.output_file, args.page)
+
+    extract_pages(args.input, args.output, args.page)
