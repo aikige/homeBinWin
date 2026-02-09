@@ -1,5 +1,7 @@
 @echo off
-REM avoid to execute script on venv.
-where deactivate.bat > nil 2>&1
-if %ERRORLEVEL% equ 0 call deactivate.bat
+
+REM need to avoid to execute script on venv.
+REM set path and force to use python in the sytem.
+path %LOCALAPPDATA%\Programs\Python\Python312;%LOCALAPPDATA%\Programs\Python\Python311;%LOCALAPPDATA%\Programs\Python\Python310;%PATH%
+
 py %~dp0\extPdf.py %*
