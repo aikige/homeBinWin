@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from PIL import Image
-from pypdf import PdfReader, PdfWriter
+from pypdf import PdfWriter
+from io import BytesIO
 import os
-import tempfile
 
 def append_pdf(writer, filename):
     with open(filename, "rb") as f:
@@ -17,11 +17,9 @@ def merge_to_single_pdf(input_files, output_pdf):
             img = Image.open(file)
             if img.mode != "RGB":
                 img = img.convert("RGB")
-            # save as a temporal PDF and process it.
-            with tempfile.NamedTemporaryFile(delete_on_close=False, suffix=".pdf") as fp:
-                img.save(fp.name)
-                # append the temporal file to output.
-                append_pdf(writer, fp.name)
+            with BytesIO() as bio:
+                img.save(bio, format='PDF')
+                writer.append(bio)
         # --- PDF files ---
         elif ext == ".pdf":
             append_pdf(writer, file)
@@ -41,6 +39,6 @@ if __name__=="__main__":
     parser.add_argument('file', nargs='+',
             help='input file(s) for PDF conversion (JPEG, PNG or PDF)')
     parser.add_argument('-o', '--output', default=default_output,
-            help=f"the output file. default value is '{default_output}'")
+            help=f"change output filename. default value is '{default_output}'")
     args = parser.parse_args()
     merge_to_single_pdf(sorted(args.file), args.output)
