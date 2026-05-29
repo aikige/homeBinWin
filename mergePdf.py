@@ -11,12 +11,11 @@ def merge_pdfs(pdf_list, output_pdf_path):
     writer = PdfWriter()
 
     for pdf_path in pdf_list:
-        reader = PdfReader(pdf_path)
-        for page in reader.pages:
-            writer.add_page(page)
+        with open(pdf_path, "rb") as f:
+            writer.append(f)
 
-    with open(output_pdf_path, "wb") as output_pdf:
-        writer.write(output_pdf)
+    with open(output_pdf_path, "wb") as f:
+        writer.write(f)
 
     print(f"Merged {len(pdf_list)} files into {output_pdf_path}.")
 
