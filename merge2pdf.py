@@ -2,6 +2,7 @@
 from PIL import Image
 from pypdf import PdfWriter
 from io import BytesIO
+from pathlib import Path
 import os
 
 def append_pdf(writer, filename):
@@ -16,7 +17,7 @@ def merge_to_single_pdf(input_files, output_pdf):
         if not os.path.exists(file):
             print(f"File not found: {file}")
             continue
-        ext = os.path.splitext(file)[1].lower()
+        ext = Path(file).suffix.lower()
         # --- image files ---
         if ext in ['.jpg', '.jpeg', '.png']:
             img = Image.open(file)
