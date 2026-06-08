@@ -10,7 +10,7 @@ def add_watermark(input_pdf, watermark_pdf, output_pdf):
     # Assumes watermark is in 1st page.
     watermark_page = watermark_reader.pages[0]
     # Merge watermark for all pages.
-    for page_number, page in enumerate(reader.pages):
+    for page in reader.pages:
         # Resize watermark.
         watermark_page.scale_to(width=page.mediabox.width, height=page.mediabox.height)
         # Merge page.
