@@ -1,3 +1,4 @@
+#!python
 import sys, base64, pyperclip, mimetypes
 filename = sys.argv[1]
 if filename:
