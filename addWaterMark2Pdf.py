@@ -19,12 +19,12 @@ def add_watermark(input_pdf, watermark_pdf, output_pdf, owner_password=None):
         # Add to output.
         writer.add_page(page)
     # When owner_password is specified, disable modification by encryption.
-    user_password = ""
-    permissions = (UserAccessPermissions.PRINT |
-                   UserAccessPermissions.EXTRACT |
-                   UserAccessPermissions.EXTRACT_TEXT_AND_GRAPHICS)
     if (owner_password):
-        writer.encrypt(user_password, owner_password, permissions_flag=permissions)
+        user_password = ""
+        flag = (UserAccessPermissions.PRINT |
+                UserAccessPermissions.EXTRACT |
+                UserAccessPermissions.EXTRACT_TEXT_AND_GRAPHICS)
+        writer.encrypt(user_password, owner_password, permissions_flag=flag)
     # Save output to the file.
     with open(output_pdf, "wb") as f:
         writer.write(f)
