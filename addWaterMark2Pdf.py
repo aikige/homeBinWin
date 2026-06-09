@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 import sys
 from pypdf import PdfReader, PdfWriter
+from pypdf.constants import UserAccessPermissions
 
-def add_watermark(input_pdf, watermark_pdf, output_pdf):
+def add_watermark(input_pdf, watermark_pdf, output_pdf, owner_password=None):
     # Read input and watermark PDF.
     reader = PdfReader(input_pdf)
     watermark_reader = PdfReader(watermark_pdf)
@@ -17,6 +18,13 @@ def add_watermark(input_pdf, watermark_pdf, output_pdf):
         page.merge_page(watermark_page)
         # Add to output.
         writer.add_page(page)
+    # When owner_password is specified, disable modification by encryption.
+    user_password = ""
+    permissions = (UserAccessPermissions.PRINT |
+                   UserAccessPermissions.EXTRACT |
+                   UserAccessPermissions.EXTRACT_TEXT_AND_GRAPHICS)
+    if (owner_password):
+        writer.encrypt(user_password, owner_password, permissions_flag=permissions)
     # Save output to the file.
     with open(output_pdf, "wb") as f:
         writer.write(f)
@@ -34,6 +42,7 @@ if __name__ == "__main__":
             help=f"the PDF file which includes watermark image. default value is 'watermark.pdf'")
     parser.add_argument('-o', '--output', default=default_output,
             help=f"the output filename. default value is '{default_output}'")
+    parser.add_argument('-p', '--owner-password', default=None,
+            help="if specified, protect the output PDF from editing with a password")
     args = parser.parse_args()
-
-    add_watermark(args.input, args.watermark, args.output)
+    add_watermark(args.input, args.watermark, args.output, args.owner_password)
