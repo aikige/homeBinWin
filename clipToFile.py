@@ -22,25 +22,33 @@ def get_clipboard_content():
     
     return None, None
 
-def save_as_file(content_type, content):
+def save_as_file(content_type, content, basename):
     """Converts content (image or text) into a data URL."""
     if content_type == "image":
-        filename = "clip.png"
+        filename = f"{basename}.png"
         with open(filename, "wb") as f:
             content.save(f)
             return filename
     elif content_type == "text":
-        filename = "clip.txt"
+        filename = f"{basename}.txt"
         with open(filename, "w") as f:
             f.write(content)
             return filename
     return ""
 
 if __name__ == "__main__":
-    content_type, content = get_clipboard_content()
+    import argparse
+    import os
+    default_output = f"{os.path.expanduser("~")}{os.sep}Downloads{os.sep}clip"
+    parser = argparse.ArgumentParser(
+            description='Save clipbard content into a file (PNG or TXT)')
+    parser.add_argument('-o', '--output-basename', default=default_output,
+            help=f"change output basename. default value is '{default_output}'")
+    args = parser.parse_args()
 
+    content_type, content = get_clipboard_content()
     if content:
-        filename = save_as_file(content_type, content)
+        filename = save_as_file(content_type, content, args.output_basename)
         print(f"stored {content_type} content to '{filename}'")
     else:
         print("Clipboard is empty or contains an unsupported format.")
