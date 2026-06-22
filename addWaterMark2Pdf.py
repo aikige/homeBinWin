@@ -2,10 +2,9 @@
 import pikepdf
 from pikepdf import Encryption, Permissions
 
-# This version works better than pypdf.
-def add_watermark4(input_pdf, watermark_pdf, output_pdf, owner_password):
+def create_pikepdf_encryption(owner_password):
     if owner_password:
-        enc = Encryption(
+        return Encryption(
                 owner=owner_password,     # Owner password (mandatory to control)
                 allow=Permissions(
                     accessibility=True,   # This should be True
@@ -18,14 +17,31 @@ def add_watermark4(input_pdf, watermark_pdf, output_pdf, owner_password):
                 )
             )
     else:
-        enc = None
+        return None
+
+# Use pikepdf.JobBuilder for faster processing.
+# Note: `repeat` parameter in add_overlay is used which page(range)
+#       in `watermark_pdf` is repeatedly used for overlay.
+def add_watermark5(input_pdf, watermark_pdf, output_pdf, owner_password):
+    pikepdf.JobBuilder()\
+    .input(file=input_pdf)\
+    .add_overlay(watermark_pdf, repeat='1-z')\
+    .encrypt(create_pikepdf_encryption(owner_password))\
+    .output(output_pdf)\
+    .run()
+    print(f"Watermarked PDF saved as: {output_pdf}")
+
+# Use pikepdf for better processing.
+# This version may be suitable for the case where multipe page-size
+# is used in one document.
+def add_watermark4(input_pdf, watermark_pdf, output_pdf, owner_password):
     with pikepdf.Pdf.open(input_pdf) as pdf:
         with pikepdf.Pdf.open(watermark_pdf) as wm:
             wm_page = wm.pages[0]
             for page in pdf.pages:
                 page.add_overlay(wm_page)
-            pdf.save(output_pdf, encryption=enc)
-            print(f"Watermarked PDF saved as: {output_pdf}")
+            pdf.save(output_pdf, encryption=create_pikepdf_encryption(owner_password))
+        print(f"Watermarked PDF saved as: {output_pdf}")
 
 from copy import deepcopy
 from pypdf.constants import UserAccessPermissions
@@ -87,5 +103,13 @@ if __name__ == "__main__":
             help=f"the output filename. default value is '{default_output}'")
     parser.add_argument('-p', '--owner-password', default=None,
             help="if specified, protect the output PDF from editing with a password")
+    parser.add_argument('-v', '--algorithm-version', type=int, default=5,
+            help="specify algorithm version (2,4,5). default is 5")
     args = parser.parse_args()
-    add_watermark4(args.input, args.watermark, args.output, args.owner_password)
+
+    if args.algorithm_version == 2:
+        add_watermark2(args.input, args.watermark, args.output, args.owner_password)
+    elif args.algorithm_version == 4:
+        add_watermark4(args.input, args.watermark, args.output, args.owner_password)
+    else:
+        add_watermark5(args.input, args.watermark, args.output, args.owner_password)
