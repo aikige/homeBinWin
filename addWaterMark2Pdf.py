@@ -25,7 +25,7 @@ def create_pikepdf_encryption(owner_password):
 def add_watermark5(input_pdf, watermark_pdf, output_pdf, owner_password):
     pikepdf.JobBuilder()\
     .input(file=input_pdf)\
-    .add_overlay(watermark_pdf, repeat='1-z')\
+    .add_overlay(watermark_pdf, repeat='1')\
     .encrypt(create_pikepdf_encryption(owner_password))\
     .output(output_pdf)\
     .run()
