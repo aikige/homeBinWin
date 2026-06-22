@@ -24,8 +24,8 @@ def add_watermark4(input_pdf, watermark_pdf, output_pdf, owner_password):
             wm_page = wm.pages[0]
             for page in pdf.pages:
                 page.add_overlay(wm_page)
-        pdf.save(output_pdf, encryption=enc)
-        print(f"Watermarked PDF saved as: {output_pdf}")
+            pdf.save(output_pdf, encryption=enc)
+            print(f"Watermarked PDF saved as: {output_pdf}")
 
 from copy import deepcopy
 from pypdf.constants import UserAccessPermissions
