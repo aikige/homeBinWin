@@ -2,32 +2,29 @@
 import pikepdf
 from pikepdf import Encryption, Permissions
 
+# This version works better than pypdf.
 def add_watermark4(input_pdf, watermark_pdf, output_pdf, owner_password):
-    # This version works best.
-    with pikepdf.Pdf.open(input_pdf) as pdf:
-        wm = pikepdf.Pdf.open(watermark_pdf)
-        wm_page = wm.pages[0]
-        for page in pdf.pages:
-            page.add_overlay(wm_page)
-        if owner_password:
-            pdf.save(
-                output_pdf,
-                encryption=Encryption(
-                    owner=owner_password,   # 管理者パスワード
-                    R=4,                      # 暗号化バージョン（通常は4 or 6）
-                    allow=Permissions(
-                        accessibility=True,   # これだけは True 推奨（アクセシビリティ）
-                        extract=False,        # テキスト抽出禁止
-                        modify_annotation=False,
-                        modify_form=False,
-                        modify_other=False,   # ← 変更禁止（重要）
-                        print_lowres=False,
-                        print_highres=False
-                    )
+    if owner_password:
+        enc = Encryption(
+                owner=owner_password,     # Owner password (mandatory to control)
+                allow=Permissions(
+                    accessibility=True,   # This should be True
+                    extract=False,        # Disable extract texts
+                    modify_annotation=False,
+                    modify_form=False,
+                    modify_other=False,   # Important to disable modify
+                    print_lowres=False,
+                    print_highres=False
                 )
             )
-        else:
-            pdf.save(output_pdf)
+    else:
+        enc = None
+    with pikepdf.Pdf.open(input_pdf) as pdf:
+        with pikepdf.Pdf.open(watermark_pdf) as wm:
+            wm_page = wm.pages[0]
+            for page in pdf.pages:
+                page.add_overlay(wm_page)
+        pdf.save(output_pdf, encryption=enc)
         print(f"Watermarked PDF saved as: {output_pdf}")
 
 from copy import deepcopy
