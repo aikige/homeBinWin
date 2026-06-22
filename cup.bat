@@ -9,13 +9,18 @@ if "%~1" == "" (
 goto :eof
 
 :exec_upgrade
-choco upgrade -y %*
+call :exec_choco choco upgrade -y %*
 exit /b
 
 :update_vim
-choco upgrade -y vim --params "/RestartExplorer"
+call :exec_choco choco upgrade -y vim --params '/RestartExplorer'
 exit /b
 
 :check_upgradable
-choco outdated
+call :exec_choco choco outdated
+exit /b
+
+:exec_choco
+powershell -NoProfile -Command "& { %* }"
+rem $*
 exit /b
