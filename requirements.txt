@@ -1,3 +1,5 @@
 pyperclip
 pywin32
 pypdf
+pikepdf
+pillow
