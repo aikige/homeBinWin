@@ -2,10 +2,11 @@
 import pikepdf
 from pikepdf import Encryption, Permissions
 
-def create_pikepdf_encryption(owner_password):
+# Create a pikepdf.Encryption object to handle encryption.
+def create_pike_encryption(owner_password):
     if owner_password:
         return Encryption(
-                owner=owner_password,     # Owner password (mandatory to control)
+                owner=owner_password,     # Mandatory to control access.
                 allow=Permissions(
                     accessibility=True,   # This should be True
                     extract=False,        # Disable extract texts
@@ -20,28 +21,28 @@ def create_pikepdf_encryption(owner_password):
         return None
 
 # Use pikepdf.JobBuilder for faster processing.
-# Note: `repeat` parameter in add_overlay is used which page(range)
-#       in `watermark_pdf` is repeatedly used for overlay.
+# Note: the `repeat` parameter in `add_overlay` specifies which page-range
+#       in `watermark_pdf` is reused for the overlay.
+#       Ref: https://qpdf.readthedocs.io/en/stable/cli.html#page-ranges
 def add_watermark5(input_pdf, watermark_pdf, output_pdf, owner_password):
     pikepdf.JobBuilder()\
-    .input(file=input_pdf)\
-    .add_overlay(watermark_pdf, repeat='1')\
-    .encrypt(create_pikepdf_encryption(owner_password))\
-    .output(output_pdf)\
-    .run()
+            .input(input_pdf)\
+            .add_overlay(watermark_pdf, repeat='1')\
+            .encrypt(create_pike_encryption(owner_password))\
+            .output(output_pdf)\
+            .run()
     print(f"Watermarked PDF saved as: {output_pdf}")
 
 # Use pikepdf for better processing.
-# This version may be suitable for the case where multipe page-size
-# is used in one document.
+# This version may work better when multiple page sizes are used in one document.
 def add_watermark4(input_pdf, watermark_pdf, output_pdf, owner_password):
     with pikepdf.Pdf.open(input_pdf) as pdf:
         with pikepdf.Pdf.open(watermark_pdf) as wm:
             wm_page = wm.pages[0]
             for page in pdf.pages:
                 page.add_overlay(wm_page)
-            pdf.save(output_pdf, encryption=create_pikepdf_encryption(owner_password))
-        print(f"Watermarked PDF saved as: {output_pdf}")
+            pdf.save(output_pdf, encryption=create_pike_encryption(owner_password))
+            print(f"Watermarked PDF saved as: {output_pdf}")
 
 from copy import deepcopy
 from pypdf.constants import UserAccessPermissions
@@ -83,10 +84,6 @@ def add_watermark2(input_pdf, watermark_pdf, output_pdf, owner_password):
     # Save output to the file.
     with open(output_pdf, "wb") as f:
         writer.write(f)
-    print(f"Protect PDF: {output_pdf}")
-    # Save output to the file.
-    with open(output_pdf, "wb") as f:
-        writer.write(f)
     print(f"Watermarked PDF saved as: {output_pdf}")
 
 if __name__ == "__main__":
@@ -103,8 +100,8 @@ if __name__ == "__main__":
             help=f"the output filename. default value is '{default_output}'")
     parser.add_argument('-p', '--owner-password', default=None,
             help="if specified, protect the output PDF from editing with a password")
-    parser.add_argument('-v', '--algorithm-version', type=int, default=5,
-            help="specify algorithm version (2,4,5). default is 5")
+    parser.add_argument('-v', '--algorithm-version', type=int, choices=[2,4,5], default=5,
+            help="specify algorithm version. default is 5")
     args = parser.parse_args()
 
     if args.algorithm_version == 2:
